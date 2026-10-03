@@ -1,0 +1,2296 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>QuickBilling | Billing</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6fb;
+            color: #172033;
+        }
+
+        /* ================= HEADER ================= */
+
+        header {
+            background: #172033;
+            color: white;
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: #6c5ce7;
+        }
+
+        .user-area {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .user-name {
+            font-size: 14px;
+        }
+
+        .logout-btn {
+            background: #ff4757;
+            border: none;
+            color: white;
+            padding: 9px 15px;
+            border-radius: 7px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .logout-btn:hover {
+            background: #e8414f;
+        }
+
+        /* ================= PAGE ================= */
+
+        .container {
+            width: 95%;
+            max-width: 1500px;
+            margin: 25px auto;
+        }
+
+        .page-title {
+            margin-bottom: 20px;
+        }
+
+        .page-title h1 {
+            font-size: 30px;
+        }
+
+        .page-title p {
+            color: #667085;
+            margin-top: 5px;
+        }
+
+        /* ================= BILL INFO ================= */
+
+        .billing-info {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.07);
+            margin-bottom: 20px;
+        }
+
+        .billing-info h2 {
+            margin-bottom: 15px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 11px;
+            border: 1px solid #d8dce5;
+            border-radius: 7px;
+            outline: none;
+        }
+
+        .form-group input:focus {
+            border-color: #6c5ce7;
+        }
+
+        /* ================= MAIN AREA ================= */
+
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1.6fr 1fr;
+            gap: 20px;
+            align-items: start;
+        }
+
+        /* ================= PRODUCTS ================= */
+
+        .products-section {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.07);
+        }
+
+        .products-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .products-top h2 {
+            font-size: 22px;
+        }
+
+        .search-box {
+            padding: 10px 12px;
+            width: 230px;
+            border: 1px solid #d8dce5;
+            border-radius: 7px;
+            outline: none;
+        }
+
+        .categories {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .category-btn {
+            border: none;
+            background: #eef0f7;
+            padding: 9px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .category-btn.active,
+        .category-btn:hover {
+            background: #6c5ce7;
+            color: white;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .product-card {
+            border: 1px solid #e3e6ed;
+            border-radius: 10px;
+            overflow: hidden;
+            background: white;
+            transition: 0.2s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 20px rgba(0,0,0,0.1);
+        }
+
+        .product-image {
+            width: 105%;
+            height: 320px;
+            object-fit: cover;
+            background: #f1f2f6;
+        }
+
+        .product-content {
+            padding: 12px;
+        }
+
+        .product-category {
+            font-size: 11px;
+            color: #6c5ce7;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .product-name {
+            font-size: 15px;
+            font-weight: bold;
+            margin: 5px 0;
+        }
+
+        .product-price {
+            font-size: 17px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .add-btn {
+            width: 100%;
+            padding: 9px;
+            border: none;
+            background: #6c5ce7;
+            color: white;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .add-btn:hover {
+            background: #5848d5;
+        }
+
+        /* ================= BILL ================= */
+
+        .bill-section {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.07);
+            position: sticky;
+            top: 90px;
+        }
+
+        .bill-header {
+            text-align: center;
+            border-bottom: 1px dashed #bbb;
+            padding-bottom: 15px;
+            margin-bottom: 15px;
+        }
+
+        .bill-header h2 {
+            font-size: 25px;
+        }
+
+        .bill-header p {
+            color: #667085;
+            font-size: 13px;
+            margin-top: 4px;
+        }
+
+        .bill-meta {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5px;
+            font-size: 12px;
+            margin-bottom: 15px;
+        }
+
+        .customer-preview {
+            background: #f5f6fa;
+            padding: 10px;
+            border-radius: 7px;
+            margin-bottom: 15px;
+            font-size: 13px;
+        }
+
+        .cart-container {
+            max-height: 330px;
+            overflow-y: auto;
+        }
+
+        .empty-cart {
+            text-align: center;
+            color: #888;
+            padding: 30px 10px;
+        }
+
+        .cart-item {
+            border-bottom: 1px solid #eee;
+            padding: 10px 0;
+        }
+
+        .cart-item-top {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .cart-product-name {
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .remove-btn {
+            border: none;
+            background: #ff4757;
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .cart-item-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 7px;
+            font-size: 13px;
+        }
+
+        .qty-controls {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .qty-btn {
+            width: 25px;
+            height: 25px;
+            border: 1px solid #ddd;
+            background: white;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .bill-summary {
+            border-top: 1px dashed #bbb;
+            margin-top: 15px;
+            padding-top: 15px;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin: 8px 0;
+            font-size: 14px;
+        }
+
+        .discount-box {
+            display: flex;
+            gap: 8px;
+            margin: 10px 0;
+        }
+
+        .discount-box input,
+        .discount-box select {
+            padding: 9px;
+            border: 1px solid #d8dce5;
+            border-radius: 6px;
+        }
+
+        .discount-box input {
+            flex: 1;
+        }
+
+        .discount-box select {
+            width: 70px;
+        }
+
+        .grand-total {
+            font-size: 21px;
+            font-weight: bold;
+            padding-top: 10px;
+            border-top: 1px solid #ddd;
+        }
+
+        .bill-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 18px;
+        }
+
+        .action-btn {
+            padding: 11px;
+            border: none;
+            border-radius: 7px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .print-btn {
+            background: #20bf6b;
+            color: white;
+        }
+
+        .new-btn {
+            background: #172033;
+            color: white;
+        }
+
+        .action-btn:hover {
+            opacity: 0.9;
+        }
+
+        /* ================= PRINT ================= */
+
+        .print-only {
+            display: none;
+        }
+
+        @media print {
+
+            body {
+                background: white;
+            }
+
+            header,
+            .page-title,
+            .billing-info,
+            .products-section,
+            .bill-actions,
+            .discount-box {
+                display: none !important;
+            }
+
+            .container {
+                width: 100%;
+                margin: 0;
+            }
+
+            .main-grid {
+                display: block;
+            }
+
+            .bill-section {
+                box-shadow: none;
+                border: none;
+                position: static;
+                padding: 10px;
+            }
+
+            .print-only {
+                display: block;
+            }
+
+            .cart-container {
+                max-height: none;
+                overflow: visible;
+            }
+
+            .remove-btn,
+            .qty-controls button {
+                display: none;
+            }
+
+            .bill-section {
+                width: 100%;
+            }
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 1100px) {
+
+            .form-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .main-grid {
+                grid-template-columns: 1.3fr 1fr;
+            }
+        }
+
+        @media (max-width: 800px) {
+
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .user-area {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .bill-section {
+                position: static;
+            }
+        }
+
+        @media (max-width: 550px) {
+
+            .container {
+                width: 92%;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .product-image {
+                height: 130px;
+            }
+
+            .search-box {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 380px) {
+
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .bill-actions {
+                grid-template-columns: 1fr;
+            }
+            
+            
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- ================= HEADER ================= -->
+
+<header>
+
+    <div class="logo">
+        Quick<span>Billing</span>
+    </div>
+
+    <div class="user-area">
+
+        <div class="user-name">
+            Welcome, <strong id="loggedUserName">User</strong>
+        </div>
+
+        <button class="logout-btn" onclick="logout()">
+            Logout
+        </button>
+
+    </div>
+
+</header>
+
+
+<div class="container">
+
+    <div class="page-title">
+        <h1>Shop Billing</h1>
+        <p>Select products and create your customer bill.</p>
+    </div>
+
+
+    <!-- ================= CUSTOMER INFORMATION ================= -->
+
+    <div class="billing-info">
+
+        <h2>Customer Information</h2>
+
+        <div class="form-grid">
+
+            <div class="form-group">
+                <label>Customer Name</label>
+                <input
+                    type="text"
+                    id="customerName"
+                    placeholder="Enter customer name"
+                >
+            </div>
+
+            <div class="form-group">
+                <label>Customer Mobile</label>
+                <input
+                    type="tel"
+                    id="customerMobile"
+                    maxlength="10"
+                    placeholder="Enter mobile number"
+                >
+            </div>
+
+            <div class="form-group">
+                <label>Bill Number</label>
+                <input
+                    type="text"
+                    id="billNumber"
+                    readonly
+                >
+            </div>
+
+            <div class="form-group">
+                <label>Date & Time</label>
+                <input
+                    type="text"
+                    id="billDate"
+                    readonly
+                >
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <div class="main-grid">
+
+
+        <!-- ================= PRODUCTS ================= -->
+
+        <section class="products-section">
+
+            <div class="products-top">
+
+                <h2>Products</h2>
+
+                <input
+                    type="search"
+                    id="searchProduct"
+                    class="search-box"
+                    placeholder="Search product..."
+                    oninput="searchProducts()"
+                >
+
+            </div>
+
+
+            <div class="categories">
+
+                <button
+                    class="category-btn active"
+                    onclick="filterProducts('All', this)"
+                >
+                    All
+                </button>
+
+                <button
+                    class="category-btn"
+                    onclick="filterProducts('Clothes', this)"
+                >
+                    Clothes
+                </button>
+
+                <button
+                    class="category-btn"
+                    onclick="filterProducts('Shoes', this)"
+                >
+                    Shoes
+                </button>
+
+                <button
+                    class="category-btn"
+                    onclick="filterProducts('Accessories', this)"
+                >
+                    Accessories
+                </button>
+
+            </div>
+
+
+            <div class="products-grid" id="productsGrid">
+                <!-- Products generated by JavaScript -->
+            </div>
+
+        </section>
+
+
+        <!-- ================= BILL ================= -->
+
+        <section class="bill-section">
+
+            <div class="bill-header">
+
+                <h2>QuickBilling</h2>
+
+                <p>Shopping Bill</p>
+
+            </div>
+
+
+            <div class="bill-meta">
+
+                <div>
+                    <strong>Bill No:</strong>
+                    <span id="billNumberPreview"></span>
+                </div>
+
+                <div>
+                    <strong>Date:</strong>
+                    <span id="datePreview"></span>
+                </div>
+
+            </div>
+
+
+            <div class="customer-preview">
+
+                <strong>Customer:</strong>
+                <span id="customerPreview">
+                    Not entered
+                </span>
+
+                <br>
+
+                <strong>Mobile:</strong>
+                <span id="mobilePreview">
+                    Not entered
+                </span>
+
+            </div>
+
+
+            <div class="cart-container" id="cartContainer">
+
+                <div class="empty-cart">
+                    No products added yet.
+                </div>
+
+            </div>
+
+
+            <div class="bill-summary">
+
+                <div class="summary-row">
+
+                    <span>Subtotal</span>
+
+                    <strong>
+                        ₹<span id="subtotal">0.00</span>
+                    </strong>
+
+                </div>
+                <!-- ================= PAYMENT SECTION ================= -->
+
+<div class="payment-section">
+
+    <h3>Payment</h3>
+
+    <div class="payment-methods">
+
+        <label class="payment-method">
+
+            <input
+                type="radio"
+                name="paymentMethod"
+                value="Cash"
+                onchange="selectPaymentMethod('Cash')"
+            >
+
+            <span>💵 Cash</span>
+
+        </label>
+
+
+        <label class="payment-method">
+
+            <input
+                type="radio"
+                name="paymentMethod"
+                value="UPI"
+                onchange="selectPaymentMethod('UPI')"
+            >
+
+            <span>📱 UPI / Online</span>
+
+        </label>
+
+    </div>
+
+
+    <!-- UPI QR -->
+     <div class="payment-print">
+
+    <strong>Payment Method:</strong>
+    ${paymentMethod}
+
+    <br>
+
+    <strong>Payment Status:</strong>
+    ${paymentStatus}
+
+</div>
+
+    <div
+        id="upiPaymentBox"
+        class="upi-payment-box"
+    >
+
+        <h4>Scan & Pay</h4>
+
+        <p>
+            Customer can scan this QR code to pay.
+        </p>
+
+        <img
+            src="images/qr-code.png"
+            alt="UPI QR Code"
+            class="billing-qr"
+        >
+
+        <p class="payment-help">
+            After checking the payment, click
+            <strong>Payment Received</strong>.
+        </p>
+
+    </div>
+
+
+    <!-- CASH -->
+
+    <div
+        id="cashPaymentBox"
+        class="cash-payment-box"
+    >
+
+        <div class="cash-icon">
+            💵
+        </div>
+
+        <h4>Cash Payment</h4>
+
+        <p>
+            Collect cash from customer.
+        </p>
+
+    </div>
+
+
+    <!-- PAYMENT STATUS -->
+
+    <div
+        id="paymentStatus"
+        class="payment-status"
+    >
+
+        <span id="paymentStatusIcon">
+            ⏳
+        </span>
+
+        <span id="paymentStatusText">
+            Payment Pending
+        </span>
+
+    </div>
+
+
+    <button
+        type="button"
+        class="payment-received-btn"
+        onclick="paymentReceived()"
+    >
+        ✓ Payment Received
+    </button>
+
+</div>
+
+
+                <!-- MANUAL DISCOUNT -->
+
+                <div class="discount-box">
+
+                    <input
+                        type="number"
+                        id="discountValue"
+                        min="0"
+                        value="0"
+                        placeholder="Manual discount"
+                        oninput="calculateBill()"
+                    >
+
+                    <select
+                        id="discountType"
+                        onchange="calculateBill()"
+                    >
+                        <option value="amount">₹</option>
+                        <option value="percent">%</option>
+                    </select>
+
+                </div>
+
+
+                <div class="summary-row">
+
+                    <span>Discount</span>
+
+                    <strong>
+                        - ₹<span id="discountAmount">0.00</span>
+                    </strong>
+
+                </div>
+
+
+                <div class="summary-row grand-total">
+
+                    <span>Grand Total</span>
+
+                    <strong>
+                        ₹<span id="grandTotal">0.00</span>
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="bill-actions">
+
+                <button
+                    class="action-btn print-btn"
+                    onclick="printBill()"
+                >
+                    🖨 Print Bill
+                </button>
+
+                <button
+                    class="action-btn new-btn"
+                    onclick="newBill()"
+                >
+                    + New Bill
+                </button>
+
+            </div>
+
+        </section>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* =====================================================
+   QUICKBILLING - BILLING JAVASCRIPT
+===================================================== */
+
+
+/* ================= LOGIN CHECK ================= */
+
+const loggedIn =
+    localStorage.getItem("quickBillingLoggedIn");
+
+if (loggedIn !== "true") {
+
+    window.location.href = "login.html";
+
+}
+
+
+/* ================= USER DATA ================= */
+
+let currentUser = null;
+
+try {
+
+    currentUser = JSON.parse(
+        localStorage.getItem("quickBillingCurrentUser")
+    );
+
+} catch (error) {
+
+    currentUser = null;
+
+}
+
+
+if (!currentUser) {
+
+    try {
+
+        currentUser = JSON.parse(
+            localStorage.getItem("quickBillingUser")
+        );
+
+    } catch (error) {
+
+        currentUser = null;
+
+    }
+
+}
+
+
+if (currentUser) {
+
+    document.getElementById("loggedUserName").textContent =
+        currentUser.name || "User";
+
+}
+
+
+/* ================= PRODUCTS ================= */
+
+const products = [
+
+    {
+        id: 1,
+        name: "T-Shirt",
+        category: "Clothes",
+        price: 499,
+        image: "images/T-Shirt.jpg"
+    },
+
+    {
+        id: 2,
+        name: "Polo T-Shirt",
+        category: "Clothes",
+        price: 699,
+        image: "images/polo-tshirt.jpg"
+    },
+
+    {
+        id: 3,
+        name: "Shirt",
+        category: "Clothes",
+        price: 899,
+        image: "images/shirt.jpg"
+    },
+
+    {
+        id: 4,
+        name: "Jeans",
+        category: "Clothes",
+        price: 1299,
+        image: "images/jeans.jpg"
+    },
+
+    {
+        id: 5,
+        name: "Track Pant",
+        category: "Clothes",
+        price: 799,
+        image: "images/track-pant.jpg"
+    },
+
+    {
+        id: 6,
+        name: "Hoodie",
+        category: "Clothes",
+        price: 1199,
+        image: "images/hoodie.jpg"
+    },
+
+    {
+        id: 7,
+        name: "Jacket",
+        category: "Clothes",
+        price: 1599,
+        image: "images/jacket.jpg"
+    },
+
+    {
+        id: 8,
+        name: "Kurta",
+        category: "Clothes",
+        price: 999,
+        image: "images/kurta.jpg"
+    },
+
+    {
+        id: 9,
+        name: "Shorts",
+        category: "Clothes",
+        price: 599,
+        image: "images/shorts.jpg"
+    },
+
+    {
+        id: 10,
+        name: "Formal Pant",
+        category: "Clothes",
+        price: 1099,
+        image: "images/formal-pant.jpg"
+    },
+
+
+    {
+        id: 11,
+        name: "Running Shoes",
+        category: "Shoes",
+        price: 1499,
+        image: "images/running-shoes.jpg"
+    },
+
+    {
+        id: 12,
+        name: "Sports Shoes",
+        category: "Shoes",
+        price: 1799,
+        image: "images/sports-shoes.jpg"
+    },
+
+    {
+        id: 13,
+        name: "Casual Shoes",
+        category: "Shoes",
+        price: 1299,
+        image: "images/casual-shoes.jpg"
+    },
+
+    {
+        id: 14,
+        name: "Sneakers",
+        category: "Shoes",
+        price: 1999,
+        image: "images/sneakers.jpg"
+    },
+
+    {
+        id: 15,
+        name: "Formal Shoes",
+        category: "Shoes",
+        price: 1599,
+        image: "images/formal-shoes.jpg"
+    },
+
+    {
+        id: 16,
+        name: "Loafers",
+        category: "Shoes",
+        price: 1399,
+        image: "images/loafers.jpg"
+    },
+
+    {
+        id: 17,
+        name: "School Shoes",
+        category: "Shoes",
+        price: 899,
+        image: "images/school-shoes.jpg"
+    },
+
+    {
+        id: 18,
+        name: "Sandals",
+        category: "Shoes",
+        price: 699,
+        image: "images/sandals.jpg"
+    },
+
+    {
+        id: 19,
+        name: "Slippers",
+        category: "Shoes",
+        price: 399,
+        image: "images/slippers.jpg"
+    },
+
+    {
+        id: 20,
+        name: "Walking Shoes",
+        category: "Shoes",
+        price: 1199,
+        image: "images/walking-shoes.jpg"
+    },
+
+
+    {
+        id: 21,
+        name: "Backpack",
+        category: "Accessories",
+        price: 899,
+        image: "images/backpack.jpg"
+    },
+
+    {
+        id: 22,
+        name: "Wallet",
+        category: "Accessories",
+        price: 499,
+        image: "images/wallet.jpg"
+    },
+
+    {
+        id: 23,
+        name: "Belt",
+        category: "Accessories",
+        price: 399,
+        image: "images/belt.jpg"
+    },
+
+    {
+        id: 24,
+        name: "Cap",
+        category: "Accessories",
+        price: 299,
+        image: "images/cap.jpg"
+    },
+
+    {
+        id: 25,
+        name: "Sunglasses",
+        category: "Accessories",
+        price: 599,
+        image: "images/sunglasses.jpg"
+    },
+
+    {
+        id: 26,
+        name: "Watch",
+        category: "Accessories",
+        price: 1499,
+        image: "images/watch.jpg"
+    },
+
+    {
+        id: 27,
+        name: "Handbag",
+        category: "Accessories",
+        price: 999,
+        image: "images/handbag.jpg"
+    },
+
+    {
+        id: 28,
+        name: "Socks",
+        category: "Accessories",
+        price: 199,
+        image: "images/socks.jpg"
+    },
+
+    {
+        id: 29,
+        name: "Sports Bag",
+        category: "Accessories",
+        price: 799,
+        image: "images/sports-bag.jpg"
+    },
+
+    {
+        id: 30,
+        name: "Travel Bag",
+        category: "Accessories",
+        price: 1299,
+        image: "images/travel-bag.jpg"
+    }
+
+];
+
+
+/* ================= CART ================= */
+
+let cart = [];
+
+
+/* ================= BILL NUMBER ================= */
+
+function generateBillNumber() {
+
+    const now = new Date();
+
+    const number =
+        now.getFullYear().toString().slice(-2) +
+        String(now.getMonth() + 1).padStart(2, "0") +
+        String(now.getDate()).padStart(2, "0") +
+        String(now.getHours()).padStart(2, "0") +
+        String(now.getMinutes()).padStart(2, "0") +
+        String(now.getSeconds()).padStart(2, "0");
+
+    return "QB" + number;
+
+}
+
+
+/* ================= DATE ================= */
+
+function updateDateTime() {
+
+    const now = new Date();
+
+    const dateTime =
+        now.toLocaleDateString("en-IN") +
+        " " +
+        now.toLocaleTimeString("en-IN");
+
+    document.getElementById("billDate").value =
+        dateTime;
+
+    document.getElementById("datePreview").textContent =
+        dateTime;
+
+}
+
+
+/* ================= INITIAL BILL ================= */
+
+function initializeBill() {
+
+    const billNo = generateBillNumber();
+
+    document.getElementById("billNumber").value =
+        billNo;
+
+    document.getElementById("billNumberPreview").textContent =
+        billNo;
+
+    updateDateTime();
+
+}
+
+
+/* ================= DISPLAY PRODUCTS ================= */
+
+function displayProducts(productList = products) {
+
+    const grid =
+        document.getElementById("productsGrid");
+
+    grid.innerHTML = "";
+
+    if (productList.length === 0) {
+
+        grid.innerHTML = `
+            <p style="grid-column:1/-1;text-align:center;padding:30px;">
+                No product found.
+            </p>
+        `;
+
+        return;
+
+    }
+
+
+    productList.forEach(product => {
+
+        const card = document.createElement("div");
+
+        card.className = "product-card";
+
+        card.innerHTML = `
+
+            <img
+                src="${product.image}"
+                alt="${product.name}"
+                class="product-image"
+                onerror="this.src='https://via.placeholder.com/400x300?text=No+Image'"
+            >
+
+            <div class="product-content">
+
+                <div class="product-category">
+                    ${product.category}
+                </div>
+
+                <div class="product-name">
+                    ${product.name}
+                </div>
+
+                <div class="product-price">
+                    ₹${product.price.toLocaleString("en-IN")}
+                </div>
+
+                <button
+                    class="add-btn"
+                    onclick="addToCart(${product.id})"
+                >
+                    + Add to Bill
+                </button>
+
+            </div>
+        `;
+
+        grid.appendChild(card);
+
+    });
+
+}
+
+
+/* ================= FILTER ================= */
+
+function filterProducts(category, button) {
+
+    document
+        .querySelectorAll(".category-btn")
+        .forEach(btn => {
+
+            btn.classList.remove("active");
+
+        });
+
+    button.classList.add("active");
+
+    const searchValue =
+        document.getElementById("searchProduct")
+        .value
+        .toLowerCase()
+        .trim();
+
+
+    let filtered = products;
+
+
+    if (category !== "All") {
+
+        filtered = filtered.filter(product =>
+            product.category === category
+        );
+
+    }
+
+
+    if (searchValue) {
+
+        filtered = filtered.filter(product =>
+            product.name
+                .toLowerCase()
+                .includes(searchValue)
+        );
+
+    }
+
+
+    displayProducts(filtered);
+
+}
+
+
+/* ================= SEARCH ================= */
+
+function searchProducts() {
+
+    const searchValue =
+        document.getElementById("searchProduct")
+        .value
+        .toLowerCase()
+        .trim();
+
+
+    const activeButton =
+        document.querySelector(".category-btn.active");
+
+
+    const category =
+        activeButton
+        ? activeButton.textContent.trim()
+        : "All";
+
+
+    let filtered = products;
+
+
+    if (category !== "All") {
+
+        filtered = filtered.filter(product =>
+            product.category === category
+        );
+
+    }
+
+
+    if (searchValue) {
+
+        filtered = filtered.filter(product =>
+            product.name
+                .toLowerCase()
+                .includes(searchValue)
+        );
+
+    }
+
+
+    displayProducts(filtered);
+
+}
+
+
+/* ================= ADD TO CART ================= */
+
+function addToCart(productId) {
+
+    const product =
+        products.find(item =>
+            item.id === productId
+        );
+
+
+    if (!product) return;
+
+
+    const existing =
+        cart.find(item =>
+            item.id === productId
+        );
+
+
+    if (existing) {
+
+        existing.quantity++;
+
+    } else {
+
+        cart.push({
+
+            id: product.id,
+            name: product.name,
+            price: product.price,
+            quantity: 1
+
+        });
+
+    }
+
+
+    renderCart();
+
+    calculateBill();
+
+}
+
+
+/* ================= RENDER CART ================= */
+
+function renderCart() {
+
+    const container =
+        document.getElementById("cartContainer");
+
+
+    if (cart.length === 0) {
+
+        container.innerHTML = `
+            <div class="empty-cart">
+                No products added yet.
+            </div>
+        `;
+
+        return;
+
+    }
+
+
+    container.innerHTML = "";
+
+
+    cart.forEach(item => {
+
+        const cartItem =
+            document.createElement("div");
+
+        cartItem.className = "cart-item";
+
+
+        cartItem.innerHTML = `
+
+            <div class="cart-item-top">
+
+                <span class="cart-product-name">
+                    ${item.name}
+                </span>
+
+                <button
+                    class="remove-btn"
+                    onclick="removeFromCart(${item.id})"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <div class="cart-item-bottom">
+
+                <div class="qty-controls">
+
+                    <button
+                        class="qty-btn"
+                        onclick="changeQuantity(${item.id}, -1)"
+                    >
+                        −
+                    </button>
+
+                    <span>
+                        ${item.quantity}
+                    </span>
+
+                    <button
+                        class="qty-btn"
+                        onclick="changeQuantity(${item.id}, 1)"
+                    >
+                        +
+                    </button>
+
+                </div>
+
+
+                <strong>
+                    ₹${(item.price * item.quantity)
+                    .toLocaleString("en-IN")}
+                </strong>
+
+            </div>
+
+        `;
+
+
+        container.appendChild(cartItem);
+
+    });
+
+}
+
+
+/* ================= CHANGE QUANTITY ================= */
+
+function changeQuantity(productId, change) {
+
+    const item =
+        cart.find(item =>
+            item.id === productId
+        );
+
+
+    if (!item) return;
+
+
+    item.quantity += change;
+
+
+    if (item.quantity <= 0) {
+
+        cart =
+            cart.filter(item =>
+                item.id !== productId
+            );
+
+    }
+
+
+    renderCart();
+
+    calculateBill();
+
+}
+
+
+/* ================= REMOVE ================= */
+
+function removeFromCart(productId) {
+
+    cart =
+        cart.filter(item =>
+            item.id !== productId
+        );
+
+
+    renderCart();
+
+    calculateBill();
+
+}
+
+
+/* ================= CALCULATE BILL ================= */
+
+function calculateBill() {
+
+    let subtotal = 0;
+
+
+    cart.forEach(item => {
+
+        subtotal +=
+            item.price * item.quantity;
+
+    });
+
+
+    let discountInput =
+        parseFloat(
+            document.getElementById("discountValue").value
+        );
+
+
+    if (isNaN(discountInput) || discountInput < 0) {
+
+        discountInput = 0;
+
+    }
+
+
+    const discountType =
+        document.getElementById("discountType").value;
+
+
+    let discount = 0;
+
+
+    if (discountType === "percent") {
+
+        discount =
+            subtotal * discountInput / 100;
+
+    } else {
+
+        discount =
+            discountInput;
+
+    }
+
+
+    if (discount > subtotal) {
+
+        discount = subtotal;
+
+    }
+
+
+    const grandTotal =
+        subtotal - discount;
+
+
+    document.getElementById("subtotal").textContent =
+        subtotal.toFixed(2);
+
+
+    document.getElementById("discountAmount").textContent =
+        discount.toFixed(2);
+
+
+    document.getElementById("grandTotal").textContent =
+        grandTotal.toFixed(2);
+
+}
+
+
+/* ================= CUSTOMER PREVIEW ================= */
+
+document.getElementById("customerName")
+    .addEventListener("input", function() {
+
+        document.getElementById("customerPreview")
+            .textContent =
+            this.value.trim() || "Not entered";
+
+    });
+
+
+document.getElementById("customerMobile")
+    .addEventListener("input", function() {
+
+        this.value =
+            this.value.replace(/\D/g, "")
+                .slice(0, 10);
+
+
+        document.getElementById("mobilePreview")
+            .textContent =
+            this.value || "Not entered";
+
+    });
+
+
+/* ================= PRINT BILL ================= */
+
+function printBill() {
+
+    if (cart.length === 0) {
+        alert("Please add at least one product.");
+        return;
+    }
+
+    const customerName =
+        document.getElementById("customerName").value.trim();
+
+    const customerMobile =
+        document.getElementById("customerMobile").value.trim();
+
+    if (!customerName) {
+        alert("Please enter customer name.");
+        document.getElementById("customerName").focus();
+        return;
+    }
+
+    const billNo =
+        document.getElementById("billNumber").value;
+
+    const billDate =
+        document.getElementById("billDate").value;
+
+    const subtotal =
+        document.getElementById("subtotal").textContent;
+
+    const discount =
+        document.getElementById("discountAmount").textContent;
+
+    const grandTotal =
+        document.getElementById("grandTotal").textContent;
+
+
+    let itemsHTML = "";
+
+    cart.forEach((item, index) => {
+
+        const total =
+            item.price * item.quantity;
+
+        itemsHTML += `
+            <tr>
+                <td>${index + 1}</td>
+                <td>${item.name}</td>
+                <td>${item.quantity}</td>
+                <td>₹${item.price.toFixed(2)}</td>
+                <td>₹${total.toFixed(2)}</td>
+            </tr>
+        `;
+
+    });
+
+
+    const printWindow = window.open(
+        "",
+        "_blank",
+        "width=800,height=900"
+    );
+
+
+    if (!printWindow) {
+
+        alert(
+            "Print window blocked. Please allow pop-ups for this website."
+        );
+
+        return;
+    }
+    const paymentMethod =
+    selectedPaymentMethod || "Not Selected";
+
+const paymentStatus =
+    paymentCompleted ? "PAID" : "PENDING";
+
+
+    printWindow.document.write(`
+
+        <!DOCTYPE html>
+
+        <html>
+
+        <head>
+
+            <title>QuickBilling - Bill ${billNo}</title>
+
+            <style>
+
+                * {
+                    box-sizing: border-box;
+                }
+
+                body {
+                    font-family: Arial, sans-serif;
+                    margin: 0;
+                    padding: 30px;
+                    color: #111;
+                }
+
+                .invoice {
+                    max-width: 750px;
+                    margin: auto;
+                    border: 1px solid #222;
+                    padding: 25px;
+                }
+
+                .header {
+                    text-align: center;
+                    border-bottom: 2px solid #111;
+                    padding-bottom: 15px;
+                    margin-bottom: 20px;
+                }
+
+                .header h1 {
+                    margin: 0;
+                    font-size: 30px;
+                }
+
+                .header p {
+                    margin: 5px 0;
+                    color: #555;
+                }
+
+                .bill-info {
+                    display: flex;
+                    justify-content: space-between;
+                    margin-bottom: 20px;
+                    font-size: 14px;
+                }
+
+                .customer {
+                    border: 1px solid #ccc;
+                    padding: 12px;
+                    margin-bottom: 20px;
+                }
+
+                table {
+                    width: 100%;
+                    border-collapse: collapse;
+                }
+
+                th,
+                td {
+                    border: 1px solid #999;
+                    padding: 9px;
+                    text-align: left;
+                }
+
+                th {
+                    background: #f1f1f1;
+                }
+
+                .number {
+                    text-align: right;
+                }
+
+                .summary {
+                    width: 300px;
+                    margin-left: auto;
+                    margin-top: 20px;
+                }
+
+                .summary-row {
+                    display: flex;
+                    justify-content: space-between;
+                    padding: 7px 0;
+                }
+
+                .grand-total {
+                    border-top: 2px solid #111;
+                    font-size: 20px;
+                    font-weight: bold;
+                    padding-top: 10px;
+                }
+
+                .thanks {
+                    text-align: center;
+                    margin-top: 35px;
+                    border-top: 1px dashed #999;
+                    padding-top: 15px;
+                }
+
+                @media print {
+
+                    body {
+                        padding: 0;
+                    }
+
+                    .invoice {
+                        border: none;
+                    }
+
+                }
+
+            </style>
+
+        </head>
+
+
+        <body>
+
+            <div class="invoice">
+
+                <div class="header">
+
+                    <h1>QuickBilling</h1>
+
+                    <p>Shop Billing Invoice</p>
+
+                </div>
+
+
+                <div class="bill-info">
+
+                    <div>
+                        <strong>Bill No:</strong>
+                        ${billNo}
+                    </div>
+
+                    <div>
+                        <strong>Date:</strong>
+                        ${billDate}
+                    </div>
+
+                </div>
+
+
+                <div class="customer">
+
+                    <strong>Customer Name:</strong>
+                    ${customerName}
+
+                    <br><br>
+
+                    <strong>Mobile:</strong>
+                    ${customerMobile || "N/A"}
+
+                </div>
+
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>#</th>
+                            <th>Product</th>
+                            <th>Qty</th>
+                            <th>Price</th>
+                            <th>Total</th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        ${itemsHTML}
+
+                    </tbody>
+
+                </table>
+
+
+                <div class="summary">
+
+                    <div class="summary-row">
+
+                        <span>Subtotal:</span>
+
+                        <strong>
+                            ₹${subtotal}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="summary-row">
+
+                        <span>Discount:</span>
+
+                        <strong>
+                            - ₹${discount}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="summary-row grand-total">
+
+                        <span>Grand Total:</span>
+
+                        <strong>
+                            ₹${grandTotal}
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="thanks">
+
+                    <strong>Thank You!</strong>
+
+                    <p>Visit Again</p>
+
+                </div>
+
+            </div>
+
+
+            <script>
+
+                window.onload = function() {
+
+                    window.print();
+
+                };
+
+                window.onafterprint = function() {
+
+                    window.close();
+
+                };
+
+            <\/script>
+
+
+        </body>
+
+        </html>
+
+    `);
+
+
+    printWindow.document.close();
+
+}
+/* =====================================================
+   PAYMENT SYSTEM
+===================================================== */
+
+let selectedPaymentMethod = "";
+let paymentCompleted = false;
+
+
+/* ================= SELECT PAYMENT ================= */
+
+function selectPaymentMethod(method) {
+
+    selectedPaymentMethod = method;
+
+    paymentCompleted = false;
+
+
+    const upiBox =
+        document.getElementById("upiPaymentBox");
+
+    const cashBox =
+        document.getElementById("cashPaymentBox");
+
+
+    if (method === "UPI") {
+
+        upiBox.style.display = "block";
+
+        cashBox.style.display = "none";
+
+    }
+
+    else if (method === "Cash") {
+
+        upiBox.style.display = "none";
+
+        cashBox.style.display = "block";
+
+    }
+
+
+    document.getElementById("paymentStatusIcon")
+        .textContent = "⏳";
+
+    document.getElementById("paymentStatusText")
+        .textContent = "Payment Pending";
+
+}
+
+
+/* ================= PAYMENT RECEIVED ================= */
+
+function paymentReceived() {
+
+    if (!selectedPaymentMethod) {
+
+        alert("Please select a payment method.");
+
+        return;
+
+    }
+
+
+    const total =
+        parseFloat(
+            document.getElementById("grandTotal").textContent
+        );
+
+
+    if (total <= 0) {
+
+        alert("Please add products to the bill.");
+
+        return;
+
+    }
+
+
+    paymentCompleted = true;
+
+
+    document.getElementById("paymentStatusIcon")
+        .textContent = "✅";
+
+    document.getElementById("paymentStatusText")
+        .textContent =
+        "Payment Received - " +
+        selectedPaymentMethod;
+
+
+    alert(
+        "Payment received successfully!\n" +
+        "Method: " +
+        selectedPaymentMethod +
+        "\nAmount: ₹" +
+        total.toFixed(2)
+    );
+
+}
+/* ================= NEW BILL ================= */
+
+function newBill() {
+
+    const confirmNew =
+        confirm("Start a new bill?");
+
+
+    if (!confirmNew) return;
+
+
+    cart = [];
+
+
+    document.getElementById("customerName").value = "";
+
+    document.getElementById("customerMobile").value = "";
+
+    document.getElementById("discountValue").value = "0";
+
+    document.getElementById("discountType").value = "amount";
+
+
+    initializeBill();
+
+    renderCart();
+
+    calculateBill();
+
+}
+
+
+/* ================= LOGOUT ================= */
+
+function logout() {
+
+    localStorage.removeItem("quickBillingLoggedIn");
+
+    localStorage.removeItem("quickBillingCurrentUser");
+
+    window.location.href = "login.html";
+
+}
+
+
+/* ================= START ================= */
+
+displayProducts();
+
+initializeBill();
+
+renderCart();
+
+calculateBill();
+
+</script>
+
+</body>
+</html>

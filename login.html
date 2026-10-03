@@ -1,0 +1,1194 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Login | QuickBilling</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+
+        /* =====================================================
+           LOGIN PAGE
+        ===================================================== */
+
+        .login-page {
+
+            min-height: calc(100vh - 78px);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 60px 20px;
+
+            background:
+                radial-gradient(
+                    circle at 10% 20%,
+                    rgba(91, 75, 255, 0.10),
+                    transparent 30%
+                ),
+                radial-gradient(
+                    circle at 90% 80%,
+                    rgba(0, 184, 148, 0.08),
+                    transparent 30%
+                );
+        }
+
+
+        /* =====================================================
+           LOGIN CONTAINER
+        ===================================================== */
+
+        .login-container {
+
+            width: 100%;
+
+            max-width: 1000px;
+
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            background: #ffffff;
+
+            border: 1px solid #e7eaf1;
+
+            border-radius: 28px;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 20px 55px rgba(23, 32, 51, 0.12);
+        }
+
+
+        /* =====================================================
+           LEFT SIDE
+        ===================================================== */
+
+        .login-info {
+
+            padding: 55px 45px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: center;
+
+            color: #ffffff;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #5b4bff,
+                    #4435e8
+                );
+        }
+
+
+        .login-logo {
+
+            width: 65px;
+
+            height: 65px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            margin-bottom: 25px;
+
+            background:
+                rgba(255, 255, 255, 0.15);
+
+            border:
+                1px solid rgba(255, 255, 255, 0.25);
+
+            border-radius: 18px;
+
+            font-size: 30px;
+        }
+
+
+        .login-info h1 {
+
+            font-size: 42px;
+
+            line-height: 1.15;
+
+            margin-bottom: 15px;
+        }
+
+
+        .login-info h1 span {
+
+            display: block;
+
+            color: #ffffff;
+        }
+
+
+        .login-info > p {
+
+            max-width: 430px;
+
+            color:
+                rgba(255, 255, 255, 0.82);
+
+            font-size: 15px;
+
+            margin-bottom: 30px;
+        }
+
+
+        /* =====================================================
+           LOGIN FEATURES
+        ===================================================== */
+
+        .login-features {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 17px;
+        }
+
+
+        .login-feature {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+        }
+
+
+        .login-feature-icon {
+
+            width: 34px;
+
+            height: 34px;
+
+            flex-shrink: 0;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background:
+                rgba(255, 255, 255, 0.15);
+
+            border-radius: 9px;
+
+            font-size: 15px;
+        }
+
+
+        .login-feature span {
+
+            color:
+                rgba(255, 255, 255, 0.90);
+
+            font-size: 13px;
+        }
+
+
+        /* =====================================================
+           RIGHT SIDE
+        ===================================================== */
+
+        .login-form-box {
+
+            padding: 55px 45px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: center;
+        }
+
+
+        /* =====================================================
+           HEADING
+        ===================================================== */
+
+        .login-heading {
+
+            margin-bottom: 30px;
+        }
+
+
+        .login-heading span {
+
+            color: #5b4bff;
+
+            font-size: 11px;
+
+            font-weight: 800;
+
+            letter-spacing: 2px;
+        }
+
+
+        .login-heading h2 {
+
+            color: #172033;
+
+            font-size: 32px;
+
+            margin: 7px 0 5px;
+        }
+
+
+        .login-heading p {
+
+            color: #4d5870;
+
+            font-size: 13px;
+        }
+
+
+        /* =====================================================
+           INPUT GROUP
+        ===================================================== */
+
+        .login-group {
+
+            margin-bottom: 20px;
+        }
+
+
+        .login-group label {
+
+            display: block;
+
+            margin-bottom: 7px;
+
+            color: #172033;
+
+            font-size: 13px;
+
+            font-weight: 700;
+        }
+
+
+        .login-input-wrapper {
+
+            position: relative;
+        }
+
+
+        .login-input-icon {
+
+            position: absolute;
+
+            left: 14px;
+
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            font-size: 16px;
+
+            pointer-events: none;
+        }
+
+
+        .login-group input {
+
+            width: 100%;
+
+            height: 50px;
+
+            padding:
+                0 14px 0 42px;
+
+            color: #172033;
+
+            background: #f8f9fc;
+
+            border:
+                1px solid #e1e5ed;
+
+            border-radius: 10px;
+
+            outline: none;
+
+            font-family: inherit;
+
+            font-size: 14px;
+
+            transition:
+                border-color 0.3s ease,
+                box-shadow 0.3s ease,
+                background 0.3s ease;
+        }
+
+
+        .login-group input:focus {
+
+            background: #ffffff;
+
+            border-color: #5b4bff;
+
+            box-shadow:
+                0 0 0 4px
+                rgba(91, 75, 255, 0.10);
+        }
+
+
+        .login-group input::placeholder {
+
+            color: #9ba3b3;
+        }
+
+
+        /* =====================================================
+           PASSWORD
+        ===================================================== */
+
+        .login-password-wrapper input {
+
+            padding-right: 50px;
+        }
+
+
+        .login-show-password {
+
+            position: absolute;
+
+            right: 13px;
+
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            border: none;
+
+            background: transparent;
+
+            cursor: pointer;
+
+            font-size: 16px;
+        }
+
+
+        /* =====================================================
+           ERROR MESSAGE
+        ===================================================== */
+
+        .login-error {
+
+            display: none;
+
+            padding: 12px;
+
+            margin-bottom: 18px;
+
+            color: #c62828;
+
+            background: #fff0f0;
+
+            border:
+                1px solid #ffd0d0;
+
+            border-radius: 9px;
+
+            text-align: center;
+
+            font-size: 12px;
+
+            font-weight: 700;
+        }
+
+
+        .login-error.show {
+
+            display: block;
+        }
+
+
+        /* =====================================================
+           SUCCESS MESSAGE
+        ===================================================== */
+
+        .login-success {
+
+            display: none;
+
+            padding: 12px;
+
+            margin-bottom: 18px;
+
+            color: #087f5b;
+
+            background: #e9f9f3;
+
+            border:
+                1px solid #bcebdc;
+
+            border-radius: 9px;
+
+            text-align: center;
+
+            font-size: 12px;
+
+            font-weight: 700;
+        }
+
+
+        .login-success.show {
+
+            display: block;
+        }
+
+
+        /* =====================================================
+           LOGIN BUTTON
+        ===================================================== */
+
+        .login-submit {
+
+            width: 100%;
+
+            height: 50px;
+
+            border: none;
+
+            color: #ffffff;
+
+            background: #5b4bff;
+
+            border-radius: 10px;
+
+            cursor: pointer;
+
+            font-family: inherit;
+
+            font-size: 14px;
+
+            font-weight: 800;
+
+            box-shadow:
+                0 10px 24px
+                rgba(91, 75, 255, 0.22);
+
+            transition:
+                background 0.3s ease,
+                transform 0.3s ease,
+                box-shadow 0.3s ease;
+        }
+
+
+        .login-submit:hover {
+
+            background: #4435e8;
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 14px 28px
+                rgba(91, 75, 255, 0.30);
+        }
+
+
+        .login-submit:active {
+
+            transform: translateY(0);
+        }
+
+
+        /* =====================================================
+           REGISTER LINK
+        ===================================================== */
+
+        .register-link {
+
+            margin-top: 22px;
+
+            text-align: center;
+
+            color: #667085;
+
+            font-size: 12px;
+        }
+
+
+        .register-link a {
+
+            color: #5b4bff;
+
+            font-weight: 800;
+        }
+
+
+        /* =====================================================
+           HOME LINK
+        ===================================================== */
+
+        .back-home {
+
+            margin-top: 18px;
+
+            text-align: center;
+        }
+
+
+        .back-home a {
+
+            color: #667085;
+
+            font-size: 12px;
+
+            transition: color 0.3s ease;
+        }
+
+
+        .back-home a:hover {
+
+            color: #5b4bff;
+        }
+
+
+        /* =====================================================
+           MOBILE
+        ===================================================== */
+
+        @media (max-width: 800px) {
+
+            .login-container {
+
+                grid-template-columns: 1fr;
+            }
+
+
+            .login-info {
+
+                padding: 40px 30px;
+            }
+
+
+            .login-info h1 {
+
+                font-size: 34px;
+            }
+
+
+            .login-form-box {
+
+                padding: 40px 30px;
+            }
+        }
+
+
+        @media (max-width: 500px) {
+
+            .login-page {
+
+                padding: 35px 15px;
+            }
+
+
+            .login-container {
+
+                border-radius: 20px;
+            }
+
+
+            .login-info {
+
+                padding: 35px 25px;
+            }
+
+
+            .login-info h1 {
+
+                font-size: 30px;
+            }
+
+
+            .login-info > p {
+
+                font-size: 13px;
+            }
+
+
+            .login-form-box {
+
+                padding: 35px 25px;
+            }
+
+
+            .login-heading h2 {
+
+                font-size: 27px;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         NAVBAR
+    ===================================================== -->
+
+    <header class="navbar">
+
+        <div class="logo">
+
+            <span>Quick</span>Billing
+
+        </div>
+
+
+        <nav>
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="index.html#features">
+                Features
+            </a>
+
+            <a href="index.html#about">
+                About
+            </a>
+
+            <a
+                href="login.html"
+                class="active"
+            >
+                Login
+            </a>
+
+            <a
+                href="register.html"
+                class="register-btn"
+            >
+                Register
+            </a>
+
+        </nav>
+
+    </header>
+
+
+    <!-- =====================================================
+         LOGIN PAGE
+    ===================================================== -->
+
+    <main class="login-page">
+
+        <div class="login-container">
+
+
+            <!-- =================================================
+                 LEFT INFORMATION
+            ================================================= -->
+
+            <section class="login-info">
+
+                <div class="login-logo">
+                    ⚡
+                </div>
+
+
+                <h1>
+
+                    Welcome Back
+
+                    <span>QuickBilling</span>
+
+                </h1>
+
+
+                <p>
+
+                    Login with your registered mobile number
+                    and continue managing your shop billing.
+
+                </p>
+
+
+                <div class="login-features">
+
+
+                    <div class="login-feature">
+
+                        <div class="login-feature-icon">
+                            🔐
+                        </div>
+
+                        <span>
+                            Login using your registered number
+                        </span>
+
+                    </div>
+
+
+                    <div class="login-feature">
+
+                        <div class="login-feature-icon">
+                            🛒
+                        </div>
+
+                        <span>
+                            Access your billing dashboard
+                        </span>
+
+                    </div>
+
+
+                    <div class="login-feature">
+
+                        <div class="login-feature-icon">
+                            🧾
+                        </div>
+
+                        <span>
+                            Create and manage customer bills
+                        </span>
+
+                    </div>
+
+
+                    <div class="login-feature">
+
+                        <div class="login-feature-icon">
+                            🖨️
+                        </div>
+
+                        <span>
+                            Generate and print your bills
+                        </span>
+
+                    </div>
+
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 LOGIN FORM
+            ================================================= -->
+
+            <section class="login-form-box">
+
+
+                <div class="login-heading">
+
+                    <span>
+                        QUICKBILLING ACCOUNT
+                    </span>
+
+
+                    <h2>
+                        Login
+                    </h2>
+
+
+                    <p>
+                        Enter your registered details.
+                    </p>
+
+                </div>
+
+
+                <!-- ERROR -->
+
+                <div
+                    id="loginError"
+                    class="login-error"
+                >
+                    Invalid Number or Password.
+                </div>
+
+
+                <!-- SUCCESS -->
+
+                <div
+                    id="loginSuccess"
+                    class="login-success"
+                >
+                    Login successful! Opening billing...
+                </div>
+
+
+                <!-- FORM -->
+
+                <form
+                    id="loginForm"
+                    novalidate
+                >
+
+
+                    <!-- MOBILE -->
+
+                    <div class="login-group">
+
+                        <label for="loginMobile">
+                            Mobile Number
+                        </label>
+
+
+                        <div class="login-input-wrapper">
+
+                            <span class="login-input-icon">
+                                📱
+                            </span>
+
+
+                            <input
+                                type="tel"
+                                id="loginMobile"
+                                placeholder="Enter registered mobile number"
+                                maxlength="10"
+                                inputmode="numeric"
+                                autocomplete="tel"
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- PASSWORD -->
+
+                    <div class="login-group">
+
+                        <label for="loginPassword">
+                            Password
+                        </label>
+
+
+                        <div
+                            class="login-input-wrapper login-password-wrapper"
+                        >
+
+                            <span class="login-input-icon">
+                                🔒
+                            </span>
+
+
+                            <input
+                                type="password"
+                                id="loginPassword"
+                                placeholder="Enter your password"
+                                autocomplete="current-password"
+                            >
+
+
+                            <button
+                                type="button"
+                                id="loginShowPassword"
+                                class="login-show-password"
+                                aria-label="Show password"
+                            >
+                                👁️
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- LOGIN BUTTON -->
+
+                    <button
+                        type="submit"
+                        class="login-submit"
+                    >
+                        Login →
+                    </button>
+
+
+                    <!-- REGISTER -->
+
+                    <div class="register-link">
+
+                        Don't have an account?
+
+                        <a href="register.html">
+                            Create Account
+                        </a>
+
+                    </div>
+
+
+                    <!-- HOME -->
+
+                    <div class="back-home">
+
+                        <a href="index.html">
+                            ← Back to Home
+                        </a>
+
+                    </div>
+
+
+                </form>
+
+            </section>
+
+        </div>
+
+    </main>
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ===================================================== -->
+
+    <script>
+
+        /* =====================================================
+           ELEMENTS
+        ===================================================== */
+
+        const loginForm =
+            document.getElementById("loginForm");
+
+        const loginMobile =
+            document.getElementById("loginMobile");
+
+        const loginPassword =
+            document.getElementById("loginPassword");
+
+        const loginError =
+            document.getElementById("loginError");
+
+        const loginSuccess =
+            document.getElementById("loginSuccess");
+
+        const loginShowPassword =
+            document.getElementById("loginShowPassword");
+
+
+        /* =====================================================
+           MOBILE NUMBER
+           ONLY NUMBERS
+        ===================================================== */
+
+        loginMobile.addEventListener(
+            "input",
+            function () {
+
+                this.value =
+                    this.value.replace(/\D/g, "");
+
+            }
+        );
+
+
+        /* =====================================================
+           SHOW / HIDE PASSWORD
+        ===================================================== */
+
+        loginShowPassword.addEventListener(
+            "click",
+            function () {
+
+                if (
+                    loginPassword.type === "password"
+                ) {
+
+                    loginPassword.type = "text";
+
+                    this.textContent = "🙈";
+
+                } else {
+
+                    loginPassword.type = "password";
+
+                    this.textContent = "👁️";
+
+                }
+
+            }
+        );
+
+
+        /* =====================================================
+           LOGIN
+        ===================================================== */
+
+        loginForm.addEventListener(
+            "submit",
+            function (event) {
+
+                event.preventDefault();
+
+
+                /* Hide previous messages */
+
+                loginError.classList.remove("show");
+
+                loginSuccess.classList.remove("show");
+
+
+                const mobileValue =
+                    loginMobile.value.trim();
+
+                const passwordValue =
+                    loginPassword.value;
+
+
+                /* =================================================
+                   CHECK USER REGISTRATION
+                ================================================= */
+
+                const savedUser =
+                    localStorage.getItem(
+                        "quickBillingUser"
+                    );
+
+
+                if (!savedUser) {
+
+                    loginError.textContent =
+                        "No account found. Please register first.";
+
+                    loginError.classList.add("show");
+
+                    return;
+                }
+
+
+                /* =================================================
+                   READ USER DATA
+                ================================================= */
+
+                let userData;
+
+
+                try {
+
+                    userData =
+                        JSON.parse(savedUser);
+
+                } catch (error) {
+
+                    loginError.textContent =
+                        "Account data is invalid. Please register again.";
+
+                    loginError.classList.add("show");
+
+                    return;
+                }
+
+
+                /* =================================================
+                   MOBILE VALIDATION
+                ================================================= */
+
+                const mobilePattern =
+                    /^[6-9][0-9]{9}$/;
+
+
+                if (
+                    !mobilePattern.test(mobileValue)
+                ) {
+
+                    loginError.textContent =
+                        "Please enter a valid 10 digit mobile number.";
+
+                    loginError.classList.add("show");
+
+                    return;
+                }
+
+
+                /* =================================================
+                   LOGIN CHECK
+                ================================================= */
+
+                if (
+                    mobileValue === userData.mobile &&
+                    passwordValue === userData.password
+                ) {
+
+
+                    /* Save login status */
+
+                    localStorage.setItem(
+                        "quickBillingLoggedIn",
+                        "true"
+                    );
+
+
+                    /* Save current user */
+
+                    localStorage.setItem(
+                        "quickBillingCurrentUser",
+                        JSON.stringify(userData)
+                    );
+
+
+                    /* Show success */
+
+                    loginSuccess.classList.add("show");
+
+
+                    /* Open billing page */
+
+                    setTimeout(
+                        function () {
+
+                            window.location.href =
+                                "billing.html";
+
+                        },
+                        800
+                    );
+
+
+                } else {
+
+
+                    /* Wrong login */
+
+                    loginError.textContent =
+                        "Invalid Number or Password.";
+
+                    loginError.classList.add("show");
+
+                }
+
+            }
+        );
+
+    </script>
+
+
+</body>
+
+</html>
+```

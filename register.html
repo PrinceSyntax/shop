@@ -1,0 +1,1165 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Register | QuickBilling</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* =====================================================
+           REGISTER PAGE
+        ===================================================== */
+
+        .register-page {
+            min-height: calc(100vh - 78px);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 60px 20px;
+
+            background:
+                radial-gradient(
+                    circle at 10% 20%,
+                    rgba(91, 75, 255, 0.10),
+                    transparent 30%
+                ),
+                radial-gradient(
+                    circle at 90% 80%,
+                    rgba(0, 184, 148, 0.08),
+                    transparent 30%
+                );
+        }
+
+        .register-container {
+            width: 100%;
+            max-width: 1050px;
+
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+
+            background: #ffffff;
+
+            border: 1px solid #e7eaf1;
+
+            border-radius: 28px;
+
+            overflow: hidden;
+
+            box-shadow: 0 20px 55px rgba(23, 32, 51, 0.12);
+        }
+
+
+        /* =====================================================
+           LEFT SIDE
+        ===================================================== */
+
+        .register-info {
+            padding: 55px 45px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+            color: #ffffff;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #5b4bff,
+                    #4435e8
+                );
+        }
+
+        .register-logo {
+            width: 65px;
+            height: 65px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            margin-bottom: 25px;
+
+            background: rgba(255, 255, 255, 0.15);
+
+            border: 1px solid rgba(255, 255, 255, 0.25);
+
+            border-radius: 18px;
+
+            font-size: 30px;
+        }
+
+        .register-info h1 {
+            font-size: 42px;
+
+            line-height: 1.15;
+
+            margin-bottom: 15px;
+        }
+
+        .register-info h1 span {
+            display: block;
+
+            color: #ffffff;
+        }
+
+        .register-info > p {
+            max-width: 430px;
+
+            color: rgba(255, 255, 255, 0.82);
+
+            font-size: 15px;
+
+            margin-bottom: 30px;
+        }
+
+
+        /* Features */
+
+        .register-features {
+            display: flex;
+            flex-direction: column;
+
+            gap: 17px;
+        }
+
+        .register-feature {
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+        }
+
+        .register-feature-icon {
+            width: 34px;
+            height: 34px;
+
+            flex-shrink: 0;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: rgba(255, 255, 255, 0.15);
+
+            border-radius: 9px;
+
+            font-size: 15px;
+        }
+
+        .register-feature span {
+            color: rgba(255, 255, 255, 0.90);
+
+            font-size: 13px;
+        }
+
+
+        /* =====================================================
+           RIGHT SIDE FORM
+        ===================================================== */
+
+        .register-form-box {
+            padding: 55px 45px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .form-heading {
+            margin-bottom: 28px;
+        }
+
+        .form-heading span {
+            color: #5b4bff;
+
+            font-size: 11px;
+            font-weight: 800;
+
+            letter-spacing: 2px;
+        }
+
+        .form-heading h2 {
+            color: #172033;
+
+            font-size: 32px;
+
+            margin: 7px 0 5px;
+        }
+
+        .form-heading p {
+            color: #4d5870;
+
+            font-size: 13px;
+        }
+
+
+        /* =====================================================
+           FORM GROUP
+        ===================================================== */
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+
+            margin-bottom: 7px;
+
+            color: #172033;
+
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-icon {
+            position: absolute;
+
+            left: 14px;
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            font-size: 16px;
+
+            pointer-events: none;
+        }
+
+        .form-group input {
+            width: 100%;
+
+            height: 48px;
+
+            padding: 0 14px 0 42px;
+
+            color: #172033;
+
+            background: #f8f9fc;
+
+            border: 1px solid #e1e5ed;
+
+            border-radius: 10px;
+
+            outline: none;
+
+            font-family: inherit;
+            font-size: 14px;
+
+            transition:
+                border-color 0.3s ease,
+                box-shadow 0.3s ease,
+                background 0.3s ease;
+        }
+
+        .form-group input:focus {
+            background: #ffffff;
+
+            border-color: #5b4bff;
+
+            box-shadow: 0 0 0 4px rgba(91, 75, 255, 0.10);
+        }
+
+        .form-group input::placeholder {
+            color: #9ba3b3;
+        }
+
+
+        /* =====================================================
+           PASSWORD
+        ===================================================== */
+
+        .password-wrapper input {
+            padding-right: 48px;
+        }
+
+        .show-password {
+            position: absolute;
+
+            right: 13px;
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            border: none;
+
+            background: transparent;
+
+            cursor: pointer;
+
+            font-size: 16px;
+        }
+
+
+        /* =====================================================
+           ERROR MESSAGE
+        ===================================================== */
+
+        .error-message {
+            display: none;
+
+            margin-top: 5px;
+
+            color: #e53935;
+
+            font-size: 11px;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+
+        /* =====================================================
+           TERMS
+        ===================================================== */
+
+        .terms {
+            display: flex;
+
+            align-items: flex-start;
+
+            gap: 9px;
+
+            margin: 5px 0 20px;
+        }
+
+        .terms input {
+            width: 15px;
+            height: 15px;
+
+            margin-top: 2px;
+
+            accent-color: #5b4bff;
+
+            cursor: pointer;
+        }
+
+        .terms label {
+            color: #667085;
+
+            font-size: 11px;
+
+            line-height: 1.5;
+
+            cursor: pointer;
+        }
+
+        .terms a {
+            color: #5b4bff;
+
+            font-weight: 700;
+        }
+
+
+        /* =====================================================
+           REGISTER BUTTON
+        ===================================================== */
+
+        .register-submit {
+            width: 100%;
+
+            height: 50px;
+
+            border: none;
+
+            color: #ffffff;
+
+            background: #5b4bff;
+
+            border-radius: 10px;
+
+            cursor: pointer;
+
+            font-family: inherit;
+
+            font-size: 14px;
+            font-weight: 800;
+
+            box-shadow: 0 10px 24px rgba(91, 75, 255, 0.22);
+
+            transition:
+                background 0.3s ease,
+                transform 0.3s ease,
+                box-shadow 0.3s ease;
+        }
+
+        .register-submit:hover {
+            background: #4435e8;
+
+            transform: translateY(-2px);
+
+            box-shadow: 0 14px 28px rgba(91, 75, 255, 0.30);
+        }
+
+        .register-submit:active {
+            transform: translateY(0);
+        }
+
+
+        /* =====================================================
+           LOGIN LINK
+        ===================================================== */
+
+        .login-link {
+            margin-top: 20px;
+
+            text-align: center;
+
+            color: #667085;
+
+            font-size: 12px;
+        }
+
+        .login-link a {
+            color: #5b4bff;
+
+            font-weight: 800;
+        }
+
+
+        /* =====================================================
+           SUCCESS MESSAGE
+        ===================================================== */
+
+        .success-message {
+            display: none;
+
+            padding: 12px;
+
+            margin-bottom: 18px;
+
+            color: #087f5b;
+
+            background: #e9f9f3;
+
+            border: 1px solid #bcebdc;
+
+            border-radius: 9px;
+
+            text-align: center;
+
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+
+        /* =====================================================
+           MOBILE RESPONSIVE
+        ===================================================== */
+
+        @media (max-width: 800px) {
+
+            .register-container {
+                grid-template-columns: 1fr;
+            }
+
+            .register-info {
+                padding: 40px 30px;
+            }
+
+            .register-info h1 {
+                font-size: 34px;
+            }
+
+            .register-form-box {
+                padding: 40px 30px;
+            }
+        }
+
+
+        @media (max-width: 500px) {
+
+            .register-page {
+                padding: 35px 15px;
+            }
+
+            .register-container {
+                border-radius: 20px;
+            }
+
+            .register-info {
+                padding: 35px 25px;
+            }
+
+            .register-info h1 {
+                font-size: 30px;
+            }
+
+            .register-info > p {
+                font-size: 13px;
+            }
+
+            .register-form-box {
+                padding: 35px 25px;
+            }
+
+            .form-heading h2 {
+                font-size: 27px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <!-- =====================================================
+         NAVBAR
+    ===================================================== -->
+
+    <header class="navbar">
+
+        <div class="logo">
+            <span>Quick</span>Billing
+        </div>
+
+        <nav>
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="index.html#features">
+                Features
+            </a>
+
+            <a href="index.html#about">
+                About
+            </a>
+
+            <a href="login.html">
+                Login
+            </a>
+
+            <a href="register.html" class="register-btn">
+                Register
+            </a>
+
+        </nav>
+
+    </header>
+
+
+    <!-- =====================================================
+         REGISTER PAGE
+    ===================================================== -->
+
+    <main class="register-page">
+
+        <div class="register-container">
+
+
+            <!-- =================================================
+                 LEFT INFORMATION
+            ================================================= -->
+
+            <section class="register-info">
+
+                <div class="register-logo">
+                    ⚡
+                </div>
+
+                <h1>
+                    Join
+                    <span>QuickBilling</span>
+                </h1>
+
+                <p>
+                    Create your account and start managing
+                    products and generating professional bills
+                    quickly and easily.
+                </p>
+
+
+                <div class="register-features">
+
+                    <div class="register-feature">
+
+                        <div class="register-feature-icon">
+                            🛒
+                        </div>
+
+                        <span>
+                            Manage your shop products easily
+                        </span>
+
+                    </div>
+
+
+                    <div class="register-feature">
+
+                        <div class="register-feature-icon">
+                            🧾
+                        </div>
+
+                        <span>
+                            Create professional customer bills
+                        </span>
+
+                    </div>
+
+
+                    <div class="register-feature">
+
+                        <div class="register-feature-icon">
+                            💸
+                        </div>
+
+                        <span>
+                            Add your own discount while billing
+                        </span>
+
+                    </div>
+
+
+                    <div class="register-feature">
+
+                        <div class="register-feature-icon">
+                            🖨️
+                        </div>
+
+                        <span>
+                            Print bills directly from the website
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 REGISTER FORM
+            ================================================= -->
+
+            <section class="register-form-box">
+
+                <div class="form-heading">
+
+                    <span>CREATE ACCOUNT</span>
+
+                    <h2>
+                        Register
+                    </h2>
+
+                    <p>
+                        Enter your details to create your account.
+                    </p>
+
+                </div>
+
+
+                <!-- SUCCESS MESSAGE -->
+
+                <div id="successMessage" class="success-message">
+                    Registration successful! Redirecting to login...
+                </div>
+
+
+                <!-- FORM -->
+
+                <form id="registerForm" novalidate>
+
+
+                    <!-- FULL NAME -->
+
+                    <div class="form-group">
+
+                        <label for="fullName">
+                            Full Name
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <span class="input-icon">
+                                👤
+                            </span>
+
+                            <input
+                                type="text"
+                                id="fullName"
+                                placeholder="Enter your full name"
+                                autocomplete="name"
+                            >
+
+                        </div>
+
+                        <div
+                            id="nameError"
+                            class="error-message"
+                        >
+                            Please enter your name.
+                        </div>
+
+                    </div>
+
+
+                    <!-- MOBILE NUMBER -->
+
+                    <div class="form-group">
+
+                        <label for="mobile">
+                            Mobile Number
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <span class="input-icon">
+                                📱
+                            </span>
+
+                            <input
+                                type="tel"
+                                id="mobile"
+                                placeholder="Enter 10 digit mobile number"
+                                maxlength="10"
+                                inputmode="numeric"
+                                autocomplete="tel"
+                            >
+
+                        </div>
+
+                        <div
+                            id="mobileError"
+                            class="error-message"
+                        >
+                            Please enter a valid 10 digit mobile number.
+                        </div>
+
+                    </div>
+
+
+                    <!-- PASSWORD -->
+
+                    <div class="form-group">
+
+                        <label for="password">
+                            Password
+                        </label>
+
+                        <div class="input-wrapper password-wrapper">
+
+                            <span class="input-icon">
+                                🔒
+                            </span>
+
+                            <input
+                                type="password"
+                                id="password"
+                                placeholder="Create a password"
+                                minlength="6"
+                                autocomplete="new-password"
+                            >
+
+                            <button
+                                type="button"
+                                class="show-password"
+                                id="showPassword"
+                                aria-label="Show password"
+                            >
+                                👁️
+                            </button>
+
+                        </div>
+
+                        <div
+                            id="passwordError"
+                            class="error-message"
+                        >
+                            Password must contain at least 6 characters.
+                        </div>
+
+                    </div>
+
+
+                    <!-- CONFIRM PASSWORD -->
+
+                    <div class="form-group">
+
+                        <label for="confirmPassword">
+                            Confirm Password
+                        </label>
+
+                        <div class="input-wrapper password-wrapper">
+
+                            <span class="input-icon">
+                                🔐
+                            </span>
+
+                            <input
+                                type="password"
+                                id="confirmPassword"
+                                placeholder="Confirm your password"
+                                autocomplete="new-password"
+                            >
+
+                            <button
+                                type="button"
+                                class="show-password"
+                                id="showConfirmPassword"
+                                aria-label="Show confirm password"
+                            >
+                                👁️
+                            </button>
+
+                        </div>
+
+                        <div
+                            id="confirmPasswordError"
+                            class="error-message"
+                        >
+                            Passwords do not match.
+                        </div>
+
+                    </div>
+
+
+                    <!-- TERMS -->
+
+                    <div class="terms">
+
+                        <input
+                            type="checkbox"
+                            id="terms"
+                        >
+
+                        <label for="terms">
+                            I agree to the QuickBilling
+                            <a href="#">
+                                Terms & Conditions
+                            </a>
+                        </label>
+
+                    </div>
+
+                    <div
+                        id="termsError"
+                        class="error-message"
+                    >
+                        Please accept the terms and conditions.
+                    </div>
+
+
+                    <!-- SUBMIT -->
+
+                    <button
+                        type="submit"
+                        class="register-submit"
+                    >
+                        Create Account →
+                    </button>
+
+
+                    <!-- LOGIN -->
+
+                    <div class="login-link">
+
+                        Already have an account?
+
+                        <a href="login.html">
+                            Login
+                        </a>
+
+                    </div>
+
+                </form>
+
+            </section>
+
+        </div>
+
+    </main>
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ===================================================== -->
+
+    <script>
+
+        /* =====================================================
+           ELEMENTS
+        ===================================================== */
+
+        const registerForm =
+            document.getElementById("registerForm");
+
+        const fullName =
+            document.getElementById("fullName");
+
+        const mobile =
+            document.getElementById("mobile");
+
+        const password =
+            document.getElementById("password");
+
+        const confirmPassword =
+            document.getElementById("confirmPassword");
+
+        const terms =
+            document.getElementById("terms");
+
+        const successMessage =
+            document.getElementById("successMessage");
+
+
+        /* =====================================================
+           ERROR ELEMENTS
+        ===================================================== */
+
+        const nameError =
+            document.getElementById("nameError");
+
+        const mobileError =
+            document.getElementById("mobileError");
+
+        const passwordError =
+            document.getElementById("passwordError");
+
+        const confirmPasswordError =
+            document.getElementById("confirmPasswordError");
+
+        const termsError =
+            document.getElementById("termsError");
+
+
+        /* =====================================================
+           MOBILE INPUT
+           ONLY NUMBERS ALLOWED
+        ===================================================== */
+
+        mobile.addEventListener("input", function () {
+
+            this.value = this.value.replace(/\D/g, "");
+
+        });
+
+
+        /* =====================================================
+           SHOW / HIDE PASSWORD
+        ===================================================== */
+
+        const showPassword =
+            document.getElementById("showPassword");
+
+        const showConfirmPassword =
+            document.getElementById("showConfirmPassword");
+
+
+        showPassword.addEventListener("click", function () {
+
+            if (password.type === "password") {
+
+                password.type = "text";
+
+                this.textContent = "🙈";
+
+            } else {
+
+                password.type = "password";
+
+                this.textContent = "👁️";
+            }
+
+        });
+
+
+        showConfirmPassword.addEventListener("click", function () {
+
+            if (confirmPassword.type === "password") {
+
+                confirmPassword.type = "text";
+
+                this.textContent = "🙈";
+
+            } else {
+
+                confirmPassword.type = "password";
+
+                this.textContent = "👁️";
+            }
+
+        });
+
+
+        /* =====================================================
+           HIDE ALL ERRORS
+        ===================================================== */
+
+        function hideErrors() {
+
+            nameError.classList.remove("show");
+
+            mobileError.classList.remove("show");
+
+            passwordError.classList.remove("show");
+
+            confirmPasswordError.classList.remove("show");
+
+            termsError.classList.remove("show");
+
+            successMessage.classList.remove("show");
+
+        }
+
+
+        /* =====================================================
+           FORM SUBMIT
+        ===================================================== */
+
+        registerForm.addEventListener("submit", function (event) {
+
+            event.preventDefault();
+
+            hideErrors();
+
+            let isValid = true;
+
+
+            /* -----------------------------------------------
+               NAME VALIDATION
+            ------------------------------------------------ */
+
+            const nameValue =
+                fullName.value.trim();
+
+            if (nameValue.length < 2) {
+
+                nameError.classList.add("show");
+
+                isValid = false;
+            }
+
+
+            /* -----------------------------------------------
+               MOBILE VALIDATION
+            ------------------------------------------------ */
+
+            const mobileValue =
+                mobile.value.trim();
+
+            const mobilePattern =
+                /^[6-9][0-9]{9}$/;
+
+            if (!mobilePattern.test(mobileValue)) {
+
+                mobileError.classList.add("show");
+
+                isValid = false;
+            }
+
+
+            /* -----------------------------------------------
+               PASSWORD VALIDATION
+            ------------------------------------------------ */
+
+            const passwordValue =
+                password.value;
+
+            if (passwordValue.length < 6) {
+
+                passwordError.classList.add("show");
+
+                isValid = false;
+            }
+
+
+            /* -----------------------------------------------
+               CONFIRM PASSWORD
+            ------------------------------------------------ */
+
+            if (
+                confirmPassword.value !== passwordValue ||
+                confirmPassword.value === ""
+            ) {
+
+                confirmPasswordError.classList.add("show");
+
+                isValid = false;
+            }
+
+
+            /* -----------------------------------------------
+               TERMS
+            ------------------------------------------------ */
+
+            if (!terms.checked) {
+
+                termsError.classList.add("show");
+
+                isValid = false;
+            }
+
+
+            /* -----------------------------------------------
+               IF INVALID
+            ------------------------------------------------ */
+
+            if (!isValid) {
+
+                return;
+            }
+
+
+            /* -----------------------------------------------
+               SAVE REGISTRATION
+            ------------------------------------------------ */
+
+            const userData = {
+
+                name: nameValue,
+
+                mobile: mobileValue,
+
+                password: passwordValue
+
+            };
+
+
+            localStorage.setItem(
+                "quickBillingUser",
+                JSON.stringify(userData)
+            );
+
+
+            /* -----------------------------------------------
+               SUCCESS
+            ------------------------------------------------ */
+
+            successMessage.classList.add("show");
+
+
+            /* -----------------------------------------------
+               REDIRECT TO LOGIN
+            ------------------------------------------------ */
+
+            setTimeout(function () {
+
+                window.location.href = "login.html";
+
+            }, 1200);
+
+        });
+
+    </script>
+
+</body>
+</html>
+```
